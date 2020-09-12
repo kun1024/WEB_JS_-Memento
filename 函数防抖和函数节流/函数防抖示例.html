@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>   
+    <style>
+     .btn {
+
+         height: 50px;
+         color: #fff;
+         background-color: #eb0028;
+         border-radius: 4px;
+         cursor: pointer;
+     }
+    </style>
+</head>
+<body>
+<button class="btn">我是一个按钮</button>
+
+<script src="./函数防抖.js"></script>
+
+<script>
+  var btn = document.querySelector('.btn')
+
+//  我们每次鼠标移入盒子中，会打印一次 console.log
+//   btn.addEventListener('click',function(){
+//       console.log('666')
+//   })
+  
+// 上面的弊端，我们每次执行事件，都会触发一次回调函数。
+// 假使，这是一个请求后端接口的呢？用户疯狂点击你的按钮？
+
+
+// 我们尝试解决上面的问题，我们添加一个定时器，
+// btn.addEventListener('click',function(){ 
+//     setTimeout(function(){
+//         console.log('666')
+//     },3000)   
+//   })
+
+// 你会发现，貌似上面的问题解决了，但是实则，我们带来了其他的问题
+// 当你第一次点击的时候，也是延迟执行回调（用户体验极差）
+// 当你同时点击多次的时候，确实是，没有立即触发回调
+// 但是！ 当延时时间结束后，会立即执行，加载事件循环中的所有回调
+// 这是一个 BUG 的存在，具体知识，可延申至定时器的任务队列
+// 每一次执行定时器，都会向任务队列添加一次回调，当主线程结束
+// JS 会按顺序加载任务队列，到执行栈执行，瞬间爆炸！！！
+
+// var t = null
+// btn.addEventListener('click',function(){ 
+//    clearTimeout(t)
+
+//    t= setTimeout(function(){
+//         console.log('666')
+//     },3000)   
+//   })
+
+// 上面的代码 你会发现，我们还是没有解决第一次也延迟的问题。
+// 通常情况下，我们在第一次触发的时候，是不延迟执行的
+// 当第2次触发的时候，我们才开始延迟（当然，也又需求，会出现第一次延迟的情况）
+
+
+
+
+</script>
+</body>
+</html>
